@@ -284,21 +284,21 @@ public class RouteProcessTest {
             mock_bean_format_check_rule.expectedMessageCount(1);
             mock_bean_deposit_result_message_rule.expectedMessageCount(1);
         }
-        mock_http_deposit_entry_check_service.expectedMessageCount(1);
-        mock_http_deposit_category_service.expectedMessageCount(1);
-        mock_http_check_available_deposit_amount_service.expectedMessageCount(1);
-        mock_http_deposit_allocation_service.expectedMessageCount(1);
-        mock_http_deposit_service.expectedMessageCount(1);
+        mock_http_deposit_entry_check_service.expectedMessageCount(0);
+        mock_http_deposit_category_service.expectedMessageCount(0);
+        mock_http_check_available_deposit_amount_service.expectedMessageCount(0);
+        mock_http_deposit_allocation_service.expectedMessageCount(0);
+        mock_http_deposit_service.expectedMessageCount(0);
         // ----------------------------------------------------------------
         // Exchange Property: Expected Data
         // ----------------------------------------------------------------
         mock_direct_finish_process.expectedPropertyReceived("process_request", dataProvider.getRoute_request());
         mock_direct_finish_process.expectedPropertyReceived("format-check_response", dataProvider.getFormat_check_response());
-        mock_direct_finish_process.expectedPropertyReceived("response_result", dataProvider.getDeposit_entry_check_response().getResponse_result());
-        mock_direct_finish_process.expectedPropertyReceived("deposit_category_code", dataProvider.getDeposit_category_response().getDeposit_category_code());
-        mock_direct_finish_process.expectedPropertyReceived("deposit_available_amount_data", dataProvider.getCheck_available_deposit_amount_response().getDeposit_available_amount_data());
-        mock_direct_finish_process.expectedPropertyReceived("deposit_allocation_data", dataProvider.getDeposit_allocation_response().getDeposit_allocation_data());
-        mock_direct_finish_process.expectedPropertyReceived("deposit_data", dataProvider.getDeposit_response().getDeposit_data());
+        //mock_direct_finish_process.expectedPropertyReceived("response_result", dataProvider.getDeposit_entry_check_response().getResponse_result());
+        //mock_direct_finish_process.expectedPropertyReceived("deposit_category_code", dataProvider.getDeposit_category_response().getDeposit_category_code());
+        //mock_direct_finish_process.expectedPropertyReceived("deposit_available_amount_data", dataProvider.getCheck_available_deposit_amount_response().getDeposit_available_amount_data());
+        //mock_direct_finish_process.expectedPropertyReceived("deposit_allocation_data", dataProvider.getDeposit_allocation_response().getDeposit_allocation_data());
+        //mock_direct_finish_process.expectedPropertyReceived("deposit_data", dataProvider.getDeposit_response().getDeposit_data());
         mock_direct_finish_process.expectedPropertyReceived("deposit-result-message_response", dataProvider.getDeposit_result_message_response());
     }
 

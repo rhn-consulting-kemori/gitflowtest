@@ -21,6 +21,9 @@ import com.redhat.example.type.DepositResponseType;
 import com.redhat.example.type.FormatCheckResponseType;
 import com.redhat.example.type.DepositEntryCheckRequestType;
 import com.redhat.example.type.DepositEntryCheckResponseType;
+import com.redhat.example.entity.AvailableDepositAmountDataEntity;
+import com.redhat.example.entity.DepositAllocationDataEntity;
+import com.redhat.example.entity.DepositDataEntity;
 
 @Data
 @Component
@@ -67,12 +70,46 @@ public class RouteProcessTestErrorDataSet {
 
     /** KijitsuNyukinRequestEntity route_request */
     public void setRoute_request() {
-        route_request = new KijitsuNyukinRequestEntity();
+        String route_process_request_json = """
+            {
+                "REQUEST_ID": "A-002", 
+                "CARD_NUMBER": "3540000100010002", 
+                "CUSTOMER_CONTRACT_NUMBER": "A000000002", 
+                "CUSTOMER_BILLING_DUE_DATE": "20240515", 
+                "CONTRACT_SETTLEMENT_DATE":"20240610", 
+                "DEPOSIT_DATE": "20240611", 
+                "DEPOSIT_AMOUNT": 10000, 
+                "EXCESS_MONEY_HANDLING_CATEGORY": "9"
+            }
+            """;
+        try {
+            route_request = mapper.readValue(route_process_request_json,KijitsuNyukinRequestEntity.class);
+        } catch(JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
-    /** KijitsuNyukinResponseEntity route_response */
-    public void setRoute_response() {
-        route_response = new KijitsuNyukinResponseEntity();
+    /** KijitsuNyukinRequestEntity format_check_request */
+    public void setFormat_check_request() {
+        format_check_request = route_request;
+    }
+
+    /** FormatCheckResponseType format_check_response */
+    public void setFormat_check_response() {
+        format_check_response = new FormatCheckResponseType();
+        format_check_response.setResponse_result("1");
+        format_check_response.setErr_code("E02");
+        format_check_response.setErr_context("customer_contract_number: numeric error");
+    }
+
+    /** DepositEntryCheckRequestType deposit_entry_check_request */
+    public void setDeposit_entry_check_request() {
+        deposit_entry_check_request = new DepositEntryCheckRequestType();
+    }
+
+    /** DepositEntryCheckResponseType deposit_entry_check_response */
+    public void setDeposit_entry_check_response() {
+        deposit_entry_check_response = new DepositEntryCheckResponseType();
     }
 
     /** DepositCategoryRequestType deposit_category_request */
@@ -85,16 +122,6 @@ public class RouteProcessTestErrorDataSet {
         deposit_category_response = new DepositCategoryResponseType();
     }
 
-    /** DepositAllocationRequestType deposit_allocation_request */
-    public void setDeposit_allocation_request() {
-        deposit_allocation_request = new DepositAllocationRequestType();
-    }
-
-    /** DepositAllocationResponseType deposit_allocation_response */
-    public void setDeposit_allocation_response() {
-        deposit_allocation_response = new DepositAllocationResponseType();
-    }
-
     /** CheckAvailableDepositAmountRequestType check_available_deposit_amount_request */
     public void setCheck_available_deposit_amount_request() {
         check_available_deposit_amount_request = new CheckAvailableDepositAmountRequestType();
@@ -105,14 +132,14 @@ public class RouteProcessTestErrorDataSet {
         check_available_deposit_amount_response = new CheckAvailableDepositAmountResponseType();
     }
 
-    /** DepositResultMessageRequestType deposit_result_message_request */
-    public void setDeposit_result_message_request() {
-        deposit_result_message_request = new DepositResultMessageRequestType();
+    /** DepositAllocationRequestType deposit_allocation_request */
+    public void setDeposit_allocation_request() {
+        deposit_allocation_request = new DepositAllocationRequestType();
     }
 
-    /** KijitsuNyukinResponseEntity deposit_result_message_response */
-    public void setDeposit_result_message_response() {
-        deposit_result_message_response = new KijitsuNyukinResponseEntity();
+    /** DepositAllocationResponseType deposit_allocation_response */
+    public void setDeposit_allocation_response() {
+        deposit_allocation_response = new DepositAllocationResponseType();
     }
 
     /** DepositRequestType deposit_request */
@@ -125,24 +152,29 @@ public class RouteProcessTestErrorDataSet {
         deposit_response = new DepositResponseType();
     }
 
-    /** KijitsuNyukinRequestEntity format_check_request */
-    public void setFormat_check_request() {
-        format_check_request = new KijitsuNyukinRequestEntity();
+    /** DepositResultMessageRequestType deposit_result_message_request */
+    public void setDeposit_result_message_request() {
+        deposit_result_message_request = new DepositResultMessageRequestType();
+        deposit_result_message_request.setDeposit_request(route_request);
+        deposit_result_message_request.setDeposit_result("1");
+        deposit_result_message_request.setErr_code("E02");
+        deposit_result_message_request.setErr_context("customer_contract_number: numeric error");
+        deposit_result_message_request.setDeposit_category_code("");
+        deposit_result_message_request.setDeposit_data(new DepositDataEntity());
     }
 
-    /** FormatCheckResponseType format_check_response */
-    public void setFormat_check_response() {
-        format_check_response = new FormatCheckResponseType();
+    /** KijitsuNyukinResponseEntity deposit_result_message_response */
+    public void setDeposit_result_message_response() {
+        deposit_result_message_response = new KijitsuNyukinResponseEntity();
+        deposit_result_message_response.setDeposit_request(route_request);
+        deposit_result_message_response.setDeposit_result("1");
+        deposit_result_message_response.setErr_code("E02");
+        deposit_result_message_response.setErr_context("customer_contract_number: numeric error");
     }
 
-    /** DepositEntryCheckRequestType deposit_entry_check_request */
-    public void setDeposit_entry_check_request() {
-        deposit_entry_check_request = new DepositEntryCheckRequestType();
-    }
-
-    /** DepositEntryCheckResponseType deposit_entry_check_response */
-    public void setDeposit_entry_check_response() {
-        deposit_entry_check_response = new DepositEntryCheckResponseType();
+    /** KijitsuNyukinResponseEntity route_response */
+    public void setRoute_response() {
+        route_response = deposit_result_message_response;
     }
 
 }
