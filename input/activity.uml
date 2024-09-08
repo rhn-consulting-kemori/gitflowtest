@@ -11,12 +11,12 @@ note left
 end note
 #Yellow :入金依頼]
 note left
-* NyukinRequestEntity
+* KijitsuNyukinRequestEntity
 end note
 |フォーマットチェック@format-check|
 #Lime :入力チェック依頼/
 note left
-* NyukinRequestEntity
+* KijitsuNyukinRequestEntity
 ${exchangeProperty.process_request}
 end note
 #Orange :入金入力チェックルール|
