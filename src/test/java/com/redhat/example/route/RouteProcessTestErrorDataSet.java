@@ -7,17 +7,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 // Business Object
-import com.redhat.example.entity.KijitsuNyukinRequestEntity;
+import com.redhat.example.entity.NyukinRequestEntity;
 import com.redhat.example.entity.KijitsuNyukinResponseEntity;
-import com.redhat.example.type.DepositCategoryRequestType;
-import com.redhat.example.type.DepositCategoryResponseType;
-import com.redhat.example.type.DepositAllocationRequestType;
-import com.redhat.example.type.DepositAllocationResponseType;
-import com.redhat.example.type.CheckAvailableDepositAmountRequestType;
-import com.redhat.example.type.CheckAvailableDepositAmountResponseType;
 import com.redhat.example.type.DepositResultMessageRequestType;
-import com.redhat.example.type.DepositRequestType;
-import com.redhat.example.type.DepositResponseType;
+import com.redhat.example.type.KijitsuAllocationDepositRequestType;
+import com.redhat.example.type.KijitsuAllocationDepositResponseType;
 import com.redhat.example.type.FormatCheckResponseType;
 import com.redhat.example.type.DepositEntryCheckRequestType;
 import com.redhat.example.type.DepositEntryCheckResponseType;
@@ -27,19 +21,13 @@ import com.redhat.example.type.DepositEntryCheckResponseType;
 public class RouteProcessTestErrorDataSet {
 
     /** Expected Object Data */
-    KijitsuNyukinRequestEntity route_request;
+    NyukinRequestEntity route_request;
     KijitsuNyukinResponseEntity route_response;
-    DepositCategoryRequestType deposit_category_request;
-    DepositCategoryResponseType deposit_category_response;
-    DepositAllocationRequestType deposit_allocation_request;
-    DepositAllocationResponseType deposit_allocation_response;
-    CheckAvailableDepositAmountRequestType check_available_deposit_amount_request;
-    CheckAvailableDepositAmountResponseType check_available_deposit_amount_response;
     DepositResultMessageRequestType deposit_result_message_request;
     KijitsuNyukinResponseEntity deposit_result_message_response;
-    DepositRequestType deposit_request;
-    DepositResponseType deposit_response;
-    KijitsuNyukinRequestEntity format_check_request;
+    KijitsuAllocationDepositRequestType kijitsu_allocation_deposit_request;
+    KijitsuAllocationDepositResponseType kijitsu_allocation_deposit_response;
+    NyukinRequestEntity format_check_request;
     FormatCheckResponseType format_check_response;
     DepositEntryCheckRequestType deposit_entry_check_request;
     DepositEntryCheckResponseType deposit_entry_check_response;
@@ -49,60 +37,24 @@ public class RouteProcessTestErrorDataSet {
     public RouteProcessTestErrorDataSet() {
         setRoute_request();
         setRoute_response();
-        setDeposit_category_request();
-        setDeposit_category_response();
-        setDeposit_allocation_request();
-        setDeposit_allocation_response();
-        setCheck_available_deposit_amount_request();
-        setCheck_available_deposit_amount_response();
         setDeposit_result_message_request();
         setDeposit_result_message_response();
-        setDeposit_request();
-        setDeposit_response();
+        setKijitsu_allocation_deposit_request();
+        setKijitsu_allocation_deposit_response();
         setFormat_check_request();
         setFormat_check_response();
         setDeposit_entry_check_request();
         setDeposit_entry_check_response();
     }
 
-    /** KijitsuNyukinRequestEntity route_request */
+    /** NyukinRequestEntity route_request */
     public void setRoute_request() {
-        route_request = new KijitsuNyukinRequestEntity();
+        route_request = new NyukinRequestEntity();
     }
 
     /** KijitsuNyukinResponseEntity route_response */
     public void setRoute_response() {
         route_response = new KijitsuNyukinResponseEntity();
-    }
-
-    /** DepositCategoryRequestType deposit_category_request */
-    public void setDeposit_category_request() {
-        deposit_category_request = new DepositCategoryRequestType();
-    }
-
-    /** DepositCategoryResponseType deposit_category_response */
-    public void setDeposit_category_response() {
-        deposit_category_response = new DepositCategoryResponseType();
-    }
-
-    /** DepositAllocationRequestType deposit_allocation_request */
-    public void setDeposit_allocation_request() {
-        deposit_allocation_request = new DepositAllocationRequestType();
-    }
-
-    /** DepositAllocationResponseType deposit_allocation_response */
-    public void setDeposit_allocation_response() {
-        deposit_allocation_response = new DepositAllocationResponseType();
-    }
-
-    /** CheckAvailableDepositAmountRequestType check_available_deposit_amount_request */
-    public void setCheck_available_deposit_amount_request() {
-        check_available_deposit_amount_request = new CheckAvailableDepositAmountRequestType();
-    }
-
-    /** CheckAvailableDepositAmountResponseType check_available_deposit_amount_response */
-    public void setCheck_available_deposit_amount_response() {
-        check_available_deposit_amount_response = new CheckAvailableDepositAmountResponseType();
     }
 
     /** DepositResultMessageRequestType deposit_result_message_request */
@@ -115,19 +67,19 @@ public class RouteProcessTestErrorDataSet {
         deposit_result_message_response = new KijitsuNyukinResponseEntity();
     }
 
-    /** DepositRequestType deposit_request */
-    public void setDeposit_request() {
-        deposit_request = new DepositRequestType();
+    /** KijitsuAllocationDepositRequestType kijitsu_allocation_deposit_request */
+    public void setKijitsu_allocation_deposit_request() {
+        kijitsu_allocation_deposit_request = new KijitsuAllocationDepositRequestType();
     }
 
-    /** DepositResponseType deposit_response */
-    public void setDeposit_response() {
-        deposit_response = new DepositResponseType();
+    /** KijitsuAllocationDepositResponseType kijitsu_allocation_deposit_response */
+    public void setKijitsu_allocation_deposit_response() {
+        kijitsu_allocation_deposit_response = new KijitsuAllocationDepositResponseType();
     }
 
-    /** KijitsuNyukinRequestEntity format_check_request */
+    /** NyukinRequestEntity format_check_request */
     public void setFormat_check_request() {
-        format_check_request = new KijitsuNyukinRequestEntity();
+        format_check_request = new NyukinRequestEntity();
     }
 
     /** FormatCheckResponseType format_check_response */

@@ -19,7 +19,4 @@ app:
   input-topic-name: ${INPUT_TOPIC_NAME}
   output-topic-name: ${OUTPUT_TOPIC_NAME}
   url-deposit-entry-check: ${URL_DEPOSIT_ENTRY_CHECK}
-  url-deposit-category: ${URL_DEPOSIT_CATEGORY}
-  url-check-available-deposit-amount: ${URL_CHECK_AVAILABLE_DEPOSIT_AMOUNT}
-  url-deposit-allocation: ${URL_DEPOSIT_ALLOCATION}
-  url-deposit: ${URL_DEPOSIT}
+  url-kijitsu-allocation-deposit: ${URL_KIJITSU_ALLOCATION_DEPOSIT}
