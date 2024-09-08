@@ -31,7 +31,6 @@ public class DepositResultMessageRequestTypeTest {
         expected_type_map.put("deposit_result", "String");
         expected_type_map.put("err_code", "String");
         expected_type_map.put("err_context", "String");
-        expected_type_map.put("deposit_category_code", "String");
         expected_type_map.put("deposit_data", "DepositDataEntity");
     }
 

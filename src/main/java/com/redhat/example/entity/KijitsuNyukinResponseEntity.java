@@ -32,9 +32,6 @@ public class KijitsuNyukinResponseEntity {
     /** 過剰金 */
     private BigDecimal excess_money;
 
-    /** JECCS預り金 */
-    private BigDecimal jeccs_deposit;
-
     /** 残請求予定額 */
     private SeikyuCompositeUnitEntity estimated_billing_amount;
 

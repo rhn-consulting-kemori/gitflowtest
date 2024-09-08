@@ -12,13 +12,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
-import com.redhat.example.entity.AvailableDepositAmountDataEntity;
+import com.redhat.example.entity.DepositDataEntity;
 
-// Test POJO class:入金可能額応答
-public class CheckAvailableDepositAmountResponseTypeTest {
+// Test POJO class:期日充当入金応答
+public class KijitsuAllocationDepositResponseTypeTest {
 
     // Target POJO Class
-    private CheckAvailableDepositAmountResponseType obj;
+    private KijitsuAllocationDepositResponseType obj;
 
     // Expected Type Map
     private Map<String, String> expected_type_map;
@@ -26,19 +26,19 @@ public class CheckAvailableDepositAmountResponseTypeTest {
     @BeforeEach
     public void beforeEach() {
         expected_type_map = new HashMap<String, String>();
-        expected_type_map.put("service_request", "CheckAvailableDepositAmountRequestType");
+        expected_type_map.put("service_request", "KijitsuAllocationDepositRequestType");
         expected_type_map.put("response_result", "String");
         expected_type_map.put("err_code", "String");
         expected_type_map.put("err_context", "String");
-        expected_type_map.put("deposit_available_amount_data", "AvailableDepositAmountDataEntity");
+        expected_type_map.put("deposit_data", "DepositDataEntity");
     }
 
     @SuppressWarnings("unchecked")
     @Test
-    public void testCheckAvailableDepositAmountResponseType(){
+    public void testKijitsuAllocationDepositResponseType(){
         try {
-            obj = (CheckAvailableDepositAmountResponseType.class).getDeclaredConstructor().newInstance();
-            Field[] fields = CheckAvailableDepositAmountResponseType.class.getDeclaredFields();
+            obj = (KijitsuAllocationDepositResponseType.class).getDeclaredConstructor().newInstance();
+            Field[] fields = KijitsuAllocationDepositResponseType.class.getDeclaredFields();
             for(Field field : fields){
 
                 String fieldName = field.getName();
@@ -68,14 +68,14 @@ public class CheckAvailableDepositAmountResponseTypeTest {
                 } else if (dataType.isAssignableFrom(List.class)) {
                     List<String> list = new ArrayList<String>();
                     valueToSet = list;
-                } else if (dataType.isAssignableFrom(CheckAvailableDepositAmountRequestType.class)) {
-                    valueToSet = new CheckAvailableDepositAmountRequestType();
-                } else if (dataType.isAssignableFrom(AvailableDepositAmountDataEntity.class)) {
-                    valueToSet = new AvailableDepositAmountDataEntity();
+                } else if (dataType.isAssignableFrom(KijitsuAllocationDepositRequestType.class)) {
+                    valueToSet = new KijitsuAllocationDepositRequestType();
+                } else if (dataType.isAssignableFrom(DepositDataEntity.class)) {
+                    valueToSet = new DepositDataEntity();
                 } 
 
-                Method getterMethod = CheckAvailableDepositAmountResponseType.class.getMethod(getter);
-                Method setterMethod = CheckAvailableDepositAmountResponseType.class.getMethod(setter, getterMethod.getReturnType());
+                Method getterMethod = KijitsuAllocationDepositResponseType.class.getMethod(getter);
+                Method setterMethod = KijitsuAllocationDepositResponseType.class.getMethod(setter, getterMethod.getReturnType());
                 setterMethod.invoke(obj, valueToSet);
                 Object result = getterMethod.invoke(obj);
 

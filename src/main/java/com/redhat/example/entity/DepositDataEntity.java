@@ -7,6 +7,9 @@ import java.math.BigDecimal;
 @Data
 public class DepositDataEntity {
 
+    /** 入金種類区分 */
+    private String deposit_category_code;
+
     /** 入金充当情報 */
     private SaikenCompositeUnitEntity deposit_allocation_amount;
 

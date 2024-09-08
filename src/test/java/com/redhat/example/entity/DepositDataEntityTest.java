@@ -25,6 +25,7 @@ public class DepositDataEntityTest {
     @BeforeEach
     public void beforeEach() {
         expected_type_map = new HashMap<String, String>();
+        expected_type_map.put("deposit_category_code", "String");
         expected_type_map.put("deposit_allocation_amount", "SaikenCompositeUnitEntity");
         expected_type_map.put("excess_money", "BigDecimal");
         expected_type_map.put("estimated_billing_amount", "SeikyuCompositeUnitEntity");

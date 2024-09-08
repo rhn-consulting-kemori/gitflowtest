@@ -22,9 +22,6 @@ public class DepositResultMessageRequestType {
     /** エラー内容 */
     private String err_context;
 
-    /** 入金種類区分 */
-    private String deposit_category_code;
-
     /** 入金結果情報 */
     private DepositDataEntity deposit_data;
 

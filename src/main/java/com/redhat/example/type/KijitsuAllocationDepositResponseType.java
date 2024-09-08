@@ -2,14 +2,15 @@ package com.redhat.example.type;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
+import com.redhat.example.entity.DepositDataEntity;
 
-// 入金種類区分応答
+// 期日充当入金応答
 @Data
 @Component
-public class DepositCategoryResponseType {
+public class KijitsuAllocationDepositResponseType {
 
-    /** 入金種類区分要求 */
-    private DepositCategoryRequestType service_request;
+    /** 期日充当入金依頼 */
+    private KijitsuAllocationDepositRequestType service_request;
 
     /** 結果 */
     private String response_result;
@@ -20,7 +21,7 @@ public class DepositCategoryResponseType {
     /** エラー内容 */
     private String err_context;
 
-    /** 入金種類区分 */
-    private String deposit_category_code;
+    /** 入金情報 */
+    private DepositDataEntity deposit_data;
 
 }

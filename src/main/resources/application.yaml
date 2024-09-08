@@ -19,7 +19,4 @@ app:
   input-topic-name: ${INPUT_TOPIC_NAME:mytopic}
   output-topic-name: ${OUTPUT_TOPIC_NAME:myresult}
   url-deposit-entry-check: ${URL_DEPOSIT_ENTRY_CHECK:localhost:8183/camel/demo/deposit-entry-check}
-  url-deposit-category: ${URL_DEPOSIT_CATEGORY:localhost:8183/camel/demo/deposit-category}
-  url-check-available-deposit-amount: ${URL_CHECK_AVAILABLE_DEPOSIT_AMOUNT:localhost:8183/camel/demo/check-available-deposit-amount}
-  url-deposit-allocation: ${URL_DEPOSIT_ALLOCATION:localhost:8183/camel/demo/deposit-allocation}
-  url-deposit: ${URL_DEPOSIT:localhost:8183/camel/demo/deposit}
+  url-kijitsu-allocation-deposit: ${URL_KIJITSU_ALLOCATION_DEPOSIT:localhost:8183/camel/demo/kijitsu-allocation-deposit}
