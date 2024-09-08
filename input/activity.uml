@@ -1,7 +1,7 @@
 @startuml
 title
-調査部期日入金
-chosabu-kijitsu-deposit-service
+入金サービス
+deposit-service
 com.redhat.example
 end title
 |START|
@@ -9,22 +9,22 @@ start
 note left
 * kafka:{{app.input-topic-name}}
 end note
-#Yellow :調査部期日入金依頼]
+#Yellow :入金依頼]
 note left
-* KijitsuNyukinRequestEntity
+* NyukinRequestEntity
 end note
 |フォーマットチェック@format-check|
-#Lime :期日入金入力チェック依頼/
+#Lime :入力チェック依頼/
 note left
-* KijitsuNyukinRequestEntity
+* NyukinRequestEntity
 ${exchangeProperty.process_request}
 end note
-#Orange :期日入金入力チェックルール|
+#Orange :入金入力チェックルール|
 note left
 * formatCheckRule
 * executeRule
 end note
-#GreenYellow :期日入金入力チェック結果/
+#GreenYellow :入金入力チェック結果/
 note left
 * FormatCheckResponseType
 * 
@@ -62,37 +62,10 @@ note left
 * DepositEntryCheckResponseType
 * response_result
 end note
-|入金種類判定@deposit-category|
-#Lime :入金種類判定依頼/
+|期日充当入金@kijitsu-allocation-deposit|
+#Lime :期日充当入金依頼/
 note left
-* DepositCategoryRequestType
-{
-    "request_id": 
-        "${exchangeProperty.process_request.request_id}", 
-    "customer_contract_number": 
-        "${exchangeProperty.process_request.customer_contract_number}", 
-    "customer_billing_due_date": 
-        "${exchangeProperty.process_request.customer_billing_due_date}", 
-    "contract_settlement_date":
-        "${exchangeProperty.process_request.contract_settlement_date}", 
-    "deposit_date": 
-        "${exchangeProperty.process_request.deposit_date}"
-}
-end note
-#Aqua :入金種類判定>
-note left
-* http://{{app.url-deposit-category}}
-* POST
-end note
-#GreenYellow :入金種類判定結果/
-note left
-* DepositCategoryResponseType
-* deposit_category_code
-end note
-|入金可能額試算@check-available-deposit-amount|
-#Lime :入金可能額試算依頼/
-note left
-* CheckAvailableDepositAmountRequestType
+* KijitsuAllocationDepositRequestType
 {
     "request_id": 
         "${exchangeProperty.process_request.request_id}", 
@@ -104,88 +77,20 @@ note left
         "${exchangeProperty.process_request.customer_billing_due_date}", 
     "contract_settlement_date": 
         "${exchangeProperty.process_request.contract_settlement_date}", 
-    "deposit_category_code": 
-        "${exchangeProperty.deposit_category_code}"
-}
-end note
-#Aqua :入金可能額試算>
-note left
-* http://{{app.url-check-available-deposit-amount}}
-* POST
-end note
-#GreenYellow :入金可能額試算結果/
-note left
-* CheckAvailableDepositAmountResponseType
-* deposit_available_amount_data
-end note
-|入金充当額試算@deposit-allocation|
-#Lime :入金充当額算出依頼/
-note left
-* DepositAllocationRequestType
-{
-    "request_id": 
-        "${exchangeProperty.process_request.request_id}", 
-    "customer_contract_number": 
-        "${exchangeProperty.process_request.customer_contract_number}", 
-    "deposit_date": 
-        "${exchangeProperty.process_request.deposit_date}", 
-    "customer_billing_due_date": 
-        "${exchangeProperty.process_request.customer_billing_due_date}", 
-    "contract_settlement_date": 
-        "${exchangeProperty.process_request.contract_settlement_date}", 
-    "deposit_category_code": 
-        "${exchangeProperty.deposit_category_code}", 
     "deposit_amount": 
         ${exchangeProperty.process_request.deposit_amount}, 
     "excess_money_handling_category": 
-        "${exchangeProperty.process_request.excess_money_handling_category}", 
-    "deposit_available_amount_data": 
-        ${exchangeProperty.deposit_available_amount_data_json}
+        "${exchangeProperty.process_request.excess_money_handling_category}"
 }
 end note
-#Aqua :充当額算出>
+#Aqua :期日充当入金>
 note left
-* http://{{app.url-deposit-allocation}}
+* http://{{app.url-kijitsu-allocation-deposit}}
 * POST
 end note
-#GreenYellow :入金充当額算出結果/
+#GreenYellow :期日充当入金結果/
 note left
-* DepositAllocationResponseType
-* deposit_allocation_data
-end note
-|入金@deposit|
-#Lime :入金依頼/
-note left
-* DepositRequestType
-{
-    "request_id": 
-        "${exchangeProperty.process_request.request_id}", 
-    "customer_contract_number": 
-        "${exchangeProperty.process_request.customer_contract_number}", 
-    "deposit_date": 
-        "${exchangeProperty.process_request.deposit_date}", 
-    "customer_billing_due_date": 
-        "${exchangeProperty.process_request.customer_billing_due_date}", 
-    "contract_settlement_date": 
-        "${exchangeProperty.process_request.contract_settlement_date}", 
-    "deposit_category_code": 
-        "${exchangeProperty.deposit_category_code}", 
-    "deposit_amount": 
-        ${exchangeProperty.process_request.deposit_amount}, 
-    "excess_money_handling_category": 
-        "${exchangeProperty.process_request.excess_money_handling_category}", 
-    "deposit_allocation_data": 
-        ${exchangeProperty.deposit_allocation_data_json}
-}
-end note
-#Aqua :入金>
-note left
-* http://{{app.url-deposit}} 
-* POST
-end note
-#GreenYellow :入金結果/
-note left
-* DepositResponseType
+* KijitsuAllocationDepositResponseType
 * deposit_data
 end note
 |入金結果連携@deposit-result-message|
@@ -202,8 +107,6 @@ note left
         "${exchangeProperty.err_code}", 
     "err_context": 
         "${exchangeProperty.err_context}", 
-    "deposit_category_code": 
-        "${exchangeProperty.deposit_category_code}", 
     "deposit_data": 
         ${exchangeProperty.deposit_data_json}
 }
@@ -217,7 +120,6 @@ note right
     "deposit_result": "${exchangeProperty.process_result}", 
     "err_code": "${exchangeProperty.err_code}", 
     "err_context": "${exchangeProperty.err_context}", 
-    "deposit_category_code": "", 
     "deposit_data": {}
 }
 end note
