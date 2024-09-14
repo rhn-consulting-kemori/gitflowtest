@@ -71,12 +71,15 @@ public class RouteProcessTestErrorDataSet {
 
     /** KijitsuNyukinRequestEntity format_check_request */
     public void setFormat_check_request() {
-        format_check_request = new KijitsuNyukinRequestEntity();
+        format_check_request = route_request;
     }
 
     /** FormatCheckResponseType format_check_response */
     public void setFormat_check_response() {
         format_check_response = new FormatCheckResponseType();
+        format_check_response.setResponse_result("1");
+        format_check_response.setErr_code("E02");
+        format_check_response.setErr_context("customer_contract_number: numeric error");
     }
 
     /** DepositEntryCheckRequestType deposit_entry_check_request */
@@ -97,6 +100,16 @@ public class RouteProcessTestErrorDataSet {
     /** KijitsuAllocationDepositResponseType kijitsu_allocation_deposit_response */
     public void setKijitsu_allocation_deposit_response() {
         kijitsu_allocation_deposit_response = new KijitsuAllocationDepositResponseType();
+    }
+
+    /** DepositResultMessageRequestType deposit_result_message_request */
+    public void setDeposit_result_message_request() {
+        deposit_result_message_request = new DepositResultMessageRequestType();
+        deposit_result_message_request.setDeposit_request(route_request);
+        deposit_result_message_request.setDeposit_result("1");
+        deposit_result_message_request.setErr_code("E02");
+        deposit_result_message_request.setErr_context("customer_contract_number: numeric error");
+        deposit_result_message_request.setDeposit_data(new DepositDataEntity());
     }
 
     /** KijitsuNyukinResponseEntity deposit_result_message_response */

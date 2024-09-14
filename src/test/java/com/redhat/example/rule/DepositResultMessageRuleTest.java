@@ -73,7 +73,6 @@ public class DepositResultMessageRuleTest {
         // ----------------------------------------------------------------
         // excess_money, jeccs_deposit
         assertEquals(new BigDecimal(expected.get("excess_money").toString()), entity.getExcess_money(), "excess_money");
-        assertEquals(new BigDecimal(expected.get("jeccs_deposit").toString()), entity.getJeccs_deposit(), "jeccs_deposit");
         // ----------------------------------------------------------------
         // estimated_billing_amount
         assertEquals(new BigDecimal(expected.get("total_billing_principal").toString()), entity.getEstimated_billing_amount().getTotal_billing().getBilling_principal_amount(), "total_billing_principal");
@@ -123,7 +122,6 @@ public class DepositResultMessageRuleTest {
         assertNull(entity.getDeposit_category_code());
         assertNull(entity.getDeposit_allocation_amount());
         assertNull(entity.getExcess_money());
-        assertNull(entity.getJeccs_deposit());
         assertNull(entity.getEstimated_billing_amount());
         assertNull(entity.getBalance_amount());   
     }
@@ -174,7 +172,7 @@ public class DepositResultMessageRuleTest {
         String[] err_context = {"","","Test Error"};
 
         // deposit_category_code
-        String deposit_category_code = "9";
+        String deposit_category_code = "kijitsu";
 
         // deposit_allocation_amount
         long alloc_total_principal = 30000;
@@ -184,9 +182,8 @@ public class DepositResultMessageRuleTest {
         long alloc_sprv_principal = 20000;
         long alloc_sprv_interest = 200;
 
-        // excess_money, jeccs_deposit
+        // excess_money
         long excess_money = 1000;
-        long jeccs_deposit = 1000;
 
         // estimated_billing_amount
         long total_billing_principal = 50000;
@@ -234,7 +231,6 @@ public class DepositResultMessageRuleTest {
             parametermap.put("alloc_sprv_principal", alloc_sprv_principal);
             parametermap.put("alloc_sprv_interest", alloc_sprv_interest);
             parametermap.put("excess_money", excess_money);
-            parametermap.put("jeccs_deposit", jeccs_deposit);
             parametermap.put("total_billing_principal", total_billing_principal);
             parametermap.put("total_billing_interest", total_billing_interest);
             parametermap.put("total_deposit_principal", total_deposit_principal);
@@ -277,7 +273,6 @@ public class DepositResultMessageRuleTest {
         input.setDeposit_result(parametermap.get("deposit_result").toString());
         input.setErr_code(parametermap.get("err_code").toString());
         input.setErr_context(parametermap.get("err_context").toString());
-        input.setDeposit_category_code(parametermap.get("deposit_category_code").toString());
         // ----------------------------------------------------------------
         DepositDataEntity deposit_data = new DepositDataEntity();
         SaikenCompositeUnitEntity deposit_allocation_amount = new SaikenCompositeUnitEntity();
@@ -300,6 +295,7 @@ public class DepositResultMessageRuleTest {
         deposit_data.setDeposit_allocation_amount(deposit_allocation_amount);
         // ----------------------------------------------------------------
         deposit_data.setExcess_money(new BigDecimal(parametermap.get("excess_money").toString()));
+        deposit_data.setDeposit_category_code(parametermap.get("deposit_category_code").toString());
         // ----------------------------------------------------------------
         SeikyuCompositeUnitEntity estimated_billing_amount =new SeikyuCompositeUnitEntity();
         SeikyuSimpleUnitEntity total_billing = new SeikyuSimpleUnitEntity();
@@ -351,12 +347,6 @@ public class DepositResultMessageRuleTest {
 
     // 期待値設定
     static Map<String, Object> getExpectedData(Map<String, Object> parametermap) {
-        if (parametermap.get("request_id").toString().equals("A-001")) {
-            parametermap.replace("jeccs_deposit", 0);
-        } else if (parametermap.get("request_id").toString().equals("A-002")) {
-            parametermap.replace("excess_money", 0);
-        } else {
-        }
         return parametermap;
     }
 }

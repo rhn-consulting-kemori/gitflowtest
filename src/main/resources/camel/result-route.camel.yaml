@@ -63,7 +63,7 @@
             id: unmarshal-recieve-message
             description: Json->Java変換
             json:
-              unmarshalType: com.redhat.example.entity.NyukinRequestEntity
+              unmarshalType: com.redhat.example.entity.KijitsuNyukinRequestEntity
         - setProperty:
             id: setProperty-process_request
             description: RequestData設定

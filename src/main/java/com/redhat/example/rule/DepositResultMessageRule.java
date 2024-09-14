@@ -24,7 +24,7 @@ public class DepositResultMessageRule {
         String deposit_result = rule_request.getDeposit_result();
         String err_code = rule_request.getErr_code();
         String err_context = rule_request.getErr_context();
-        String deposit_category_code = rule_request.getDeposit_category_code();
+        String deposit_category_code = rule_request.getDeposit_data().getDeposit_category_code();
         DepositDataEntity deposit_data = rule_request.getDeposit_data();
 
         // Set Data
@@ -45,18 +45,6 @@ public class DepositResultMessageRule {
             result_message.setExcess_money(deposit_data.getExcess_money());
             result_message.setEstimated_billing_amount(deposit_data.getEstimated_billing_amount());
             result_message.setBalance_amount(deposit_data.getBalance_amount());
-
-            /** JECCS預り金 */
-            if(deposit_data.getExcess_money().compareTo(BigDecimal.ZERO) > 0){
-                if(deposit_request.getExcess_money_handling_category().equals("1")){
-                    result_message.setJeccs_deposit(deposit_data.getExcess_money());
-                    result_message.setExcess_money(BigDecimal.ZERO);
-                } else {
-                    result_message.setJeccs_deposit(BigDecimal.ZERO);
-                }
-            } else {
-                result_message.setJeccs_deposit(BigDecimal.ZERO);
-            }
         }
         return result_message;
     }

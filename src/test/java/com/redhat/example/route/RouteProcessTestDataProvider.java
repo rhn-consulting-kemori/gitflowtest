@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 // Business Object
-import com.redhat.example.entity.NyukinRequestEntity;
+import com.redhat.example.entity.KijitsuNyukinRequestEntity;
 import com.redhat.example.entity.KijitsuNyukinResponseEntity;
 import com.redhat.example.type.DepositResultMessageRequestType;
 import com.redhat.example.type.KijitsuAllocationDepositRequestType;
@@ -24,13 +24,13 @@ public class RouteProcessTestDataProvider {
     public static final boolean RULE_INTEGRATION_FLG = false;
 
     /** Expected Object Data */
-    NyukinRequestEntity route_request;
+    KijitsuNyukinRequestEntity route_request;
     KijitsuNyukinResponseEntity route_response;
     DepositResultMessageRequestType deposit_result_message_request;
     KijitsuNyukinResponseEntity deposit_result_message_response;
     KijitsuAllocationDepositRequestType kijitsu_allocation_deposit_request;
     KijitsuAllocationDepositResponseType kijitsu_allocation_deposit_response;
-    NyukinRequestEntity format_check_request;
+    KijitsuNyukinRequestEntity format_check_request;
     FormatCheckResponseType format_check_response;
     DepositEntryCheckRequestType deposit_entry_check_request;
     DepositEntryCheckResponseType deposit_entry_check_response;
