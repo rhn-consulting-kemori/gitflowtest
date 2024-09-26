@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: test-run-
+spec:
+  pipelineRef:
+    name: maven-pipeline
+  params:
+    - name: repo-url
+      value: 'https://github.com/rhn-consulting-kemori/gitflowtest.git'
+    - name: context-path
+      value: '.'
+    - name: IMAGE
+      value: 'deposit-camel-example'
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+    - name: maven-settings
+      emptyDir: {}

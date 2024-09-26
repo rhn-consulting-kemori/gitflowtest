@@ -1,0 +1,96 @@
+apiVersion: tekton.dev/v1
+kind: Pipeline
+metadata:
+  name: maven-pipeline
+  namespace: rhn-consulting-kemor-dev
+spec:
+  params:
+    - name: repo-url
+      type: string
+    - name: context-path
+      type: string
+    - name: IMAGE
+      type: string
+  tasks:
+    - name: fetch-repo
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: subdirectory
+          value: ''
+        - name: deleteExisting
+          value: 'true'
+      taskRef:
+        kind: ClusterTask
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+    - name: mvn-build
+      params:
+        - name: CONTEXT_DIR
+          value: $(params.context-path)
+        - name: GOALS
+          value:
+            - '-DskipTests'
+            - clean
+            - compile
+      runAfter:
+        - fetch-repo
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+        - name: maven-settings
+          workspace: maven-settings
+    - name: mvn-tests
+      params:
+        - name: CONTEXT_DIR
+          value: $(params.context-path)
+        - name: GOALS
+          value:
+            - test
+      runAfter:
+        - mvn-build
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+        - name: maven-settings
+          workspace: maven-settings
+    - name: mvn-package
+      params:
+        - name: CONTEXT_DIR
+          value: $(params.context-path)
+        - name: GOALS
+          value:
+            - package
+      runAfter:
+        - mvn-tests
+      taskRef:
+        kind: ClusterTask
+        name: maven
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+        - name: maven-settings
+          workspace: maven-settings
+    - name: buildah
+      params:
+        - name: IMAGE
+          value: $(params.IMAGE)
+      runAfter:
+        - mvn-package
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+      workspaces:
+        - name: source
+          workspace: shared-workspace
+  workspaces:
+    - name: shared-workspace
+    - name: maven-settings
