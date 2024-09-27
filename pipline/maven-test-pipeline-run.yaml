@@ -1,4 +1,4 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: PipelineRun
 metadata:
   generateName: test-run-
@@ -10,8 +10,14 @@ spec:
       value: 'https://github.com/rhn-consulting-kemori/gitflowtest.git'
     - name: context-path
       value: '.'
-    - name: IMAGE
-      value: 'deposit-camel-example'
+    - name: SONAR_HOST_URL
+      value: 'https://sonarcloud.io'
+    - name: SONAR_PROJECT_KEY
+      value: 'rhn-consulting-kemori_gitflowtest'
+    - name: SONAR_ORGANIZATION  
+      value: 'rhn-consulting-kemori'
+    - name: SONAR_TOKEN  
+      value: '5990817379ae0b1e1553a0e94be67888bb3e80d5'
   workspaces:
     - name: shared-workspace
       volumeClaimTemplate:
@@ -22,4 +28,6 @@ spec:
             requests:
               storage: 1Gi
     - name: maven-settings
+      emptyDir: {}
+    - name: sonar-settings
       emptyDir: {}

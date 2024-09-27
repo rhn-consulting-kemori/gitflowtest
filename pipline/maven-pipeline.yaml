@@ -9,7 +9,9 @@ spec:
       type: string
     - name: context-path
       type: string
-    - name: IMAGE
+    - name: SONAR_HOST_URL
+      type: string
+    - name: SONAR_PROJECT_KEY
       type: string
   tasks:
     - name: fetch-repo
@@ -79,18 +81,22 @@ spec:
           workspace: shared-workspace
         - name: maven-settings
           workspace: maven-settings
-    - name: buildah
-      params:
-        - name: IMAGE
-          value: $(params.IMAGE)
+    - name: sonarqube-scanner
+      taskRef:
+        name: sonarqube-scanner
       runAfter:
         - mvn-package
-      taskRef:
-        kind: ClusterTask
-        name: buildah
+      params:
+        - name: SONAR_HOST_URL
+          value: $(params.SONAR_HOST_URL)
+        - name: SONAR_PROJECT_KEY
+          value: $(params.SONAR_PROJECT_KEY)
       workspaces:
-        - name: source
+        - name: source-dir
           workspace: shared-workspace
+        - name: sonar-settings
+          workspace: sonar-settings
   workspaces:
     - name: shared-workspace
     - name: maven-settings
+    - name: sonar-settings
